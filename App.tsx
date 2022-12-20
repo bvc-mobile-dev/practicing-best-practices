@@ -58,7 +58,7 @@ export default function App() {
   const display = () => {
     if (entry.length > 5 && entry.length < 9) {
       return (
-        <Text numberOfLines={1} style={[styles.numbers, { fontSize: 70 }]}>
+        <Text numberOfLines={1} style={[styles.displayText, { fontSize: 70 }]}>
           {entry}
         </Text>
       );
@@ -66,7 +66,7 @@ export default function App() {
 
     if (entry.length > 7) {
       return (
-        <Text numberOfLines={1} style={[styles.numbers, { fontSize: 50 }]}>
+        <Text numberOfLines={1} style={[styles.displayText, { fontSize: 50 }]}>
           {entry}
         </Text>
       );
@@ -74,7 +74,7 @@ export default function App() {
 
     if (!entry) {
       return (
-        <Text numberOfLines={1} style={styles.numbers}>
+        <Text numberOfLines={1} style={styles.displayText}>
           {result}
         </Text>
       );
@@ -82,7 +82,7 @@ export default function App() {
 
     if (entry && entry.length < 6) {
       return (
-        <Text numberOfLines={1} style={styles.numbers}>
+        <Text numberOfLines={1} style={styles.displayText}>
           {entry}
         </Text>
       );
@@ -91,42 +91,38 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          height: 120,
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-          marginBottom: 20,
-        }}
-      >
+      <View style={styles.displayContainer}>
         <Text
           adjustsFontSizeToFit
           numberOfLines={1}
           minimumFontScale={0.2}
-          style={styles.numbers}
+          style={styles.displayText}
         >
           {entry || result}
         </Text>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={styles.btnPad}>
         <View style={styles.row}>
           <View style={styles.row}>
-            <TouchableOpacity style={styles.btn2} onPress={clear}>
-              <Text style={styles.button}>C</Text>
+            <TouchableOpacity
+              style={[styles.btn, styles.btnAccent]}
+              onPress={clear}
+            >
+              <Text style={styles.btnText}>C</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
             <TouchableOpacity
-              style={styles.btn2}
+              style={[styles.btn, styles.btnAccent]}
               onPress={() => handleOperatorPress("/")}
             >
-              <Text style={styles.button}>÷</Text>
+              <Text style={styles.btnText}>÷</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.btn2}
+              style={[styles.btn, styles.btnAccent]}
               onPress={() => handleOperatorPress("*")}
             >
-              <Text style={styles.button}>×</Text>
+              <Text style={styles.btnText}>×</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -135,25 +131,25 @@ export default function App() {
             style={styles.btn}
             onPress={() => handleNumberPress("7")}
           >
-            <Text style={styles.button}>7</Text>
+            <Text style={styles.btnText}>7</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => handleNumberPress("8")}
           >
-            <Text style={styles.button}>8</Text>
+            <Text style={styles.btnText}>8</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => handleNumberPress("9")}
           >
-            <Text style={styles.button}>9</Text>
+            <Text style={styles.btnText}>9</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btn2}
+            style={[styles.btn, styles.btnAccent]}
             onPress={() => handleOperatorPress("-")}
           >
-            <Text style={styles.button}>-</Text>
+            <Text style={styles.btnText}>-</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
@@ -161,47 +157,47 @@ export default function App() {
             style={styles.btn}
             onPress={() => handleNumberPress("4")}
           >
-            <Text style={styles.button}>4</Text>
+            <Text style={styles.btnText}>4</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => handleNumberPress("5")}
           >
-            <Text style={styles.button}>5</Text>
+            <Text style={styles.btnText}>5</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => handleNumberPress("6")}
           >
-            <Text style={styles.button}>6</Text>
+            <Text style={styles.btnText}>6</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btn2}
+            style={[styles.btn, styles.btnAccent]}
             onPress={() => handleOperatorPress("+")}
           >
-            <Text style={styles.button}>+</Text>
+            <Text style={styles.btnText}>+</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.doubleRow}>
+        <View style={[styles.row, styles.doubledRow]}>
           <View style={{ flex: 3 }}>
             <View style={styles.row}>
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => handleNumberPress("1")}
               >
-                <Text style={styles.button}>1</Text>
+                <Text style={styles.btnText}>1</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => handleNumberPress("2")}
               >
-                <Text style={styles.button}>2</Text>
+                <Text style={styles.btnText}>2</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => handleNumberPress("3")}
               >
-                <Text style={styles.button}>3</Text>
+                <Text style={styles.btnText}>3</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.row}>
@@ -209,22 +205,25 @@ export default function App() {
                 style={styles.btn}
                 onPress={() => handleNumberPress("0")}
               >
-                <Text style={styles.button}>0</Text>
+                <Text style={styles.btnText}>0</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => handleNumberPress(".")}
               >
-                <Text style={styles.button}>.</Text>
+                <Text style={styles.btnText}>.</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn} onPress={deleteChar}>
-                <Text style={styles.button}>⌫</Text>
+                <Text style={styles.btnText}>⌫</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity style={styles.btn2} onPress={calculateResult}>
-              <Text style={styles.button}>=</Text>
+            <TouchableOpacity
+              style={[styles.btn, styles.btnAccent]}
+              onPress={calculateResult}
+            >
+              <Text style={styles.btnText}>=</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -240,6 +239,9 @@ const styles = StyleSheet.create({
     marginTop: 150,
     marginBottom: 90,
   },
+  btnPad: {
+    flex: 1,
+  },
   btn: {
     borderRadius: 20,
     backgroundColor: "beige",
@@ -248,15 +250,10 @@ const styles = StyleSheet.create({
     margin: 5,
     flex: 1,
   },
-  btn2: {
-    borderRadius: 20,
+  btnAccent: {
     backgroundColor: "aquamarine",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 5,
-    flex: 1,
   },
-  button: {
+  btnText: {
     fontSize: 20,
     fontWeight: "400",
   },
@@ -264,11 +261,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
   },
-  doubleRow: {
-    flexDirection: "row",
+  doubledRow: {
     flex: 2,
   },
-  numbers: {
+  displayContainer: {
+    height: 120,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    marginBottom: 20,
+  },
+  displayText: {
     fontSize: 100,
     color: "gray",
     fontWeight: "300",
