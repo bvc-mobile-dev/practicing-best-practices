@@ -1,16 +1,33 @@
 import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
+const INITIAL_STATE = {
+  /**
+   * The result of the last operation, which is also the first operand for the
+   * current operation.
+   */
+  result: 0,
+  /**
+   * The string i.e. sequence of digits (and dot) entered by the user, which is
+   * used as the second operand for the operation once it is triggered.
+   */
+  entry: "",
+  /**
+   * The operator applied to the first operand (`result`) and the second one
+   * (`entry`).
+   */
+  operator: "+",
+};
+
 export default function App() {
-  const [result, setResult] = React.useState(0);
-  const [operator, setOperator] = React.useState("+");
-  const [entry, setEntry] = React.useState("");
+  const [result, setResult] = React.useState(INITIAL_STATE.result);
+  const [entry, setEntry] = React.useState(INITIAL_STATE.entry);
+  const [operator, setOperator] = React.useState(INITIAL_STATE.operator);
 
   const clear = () => {
-    // Reset to initial values
-    setResult(0);
-    setOperator("+");
-    setEntry("");
+    setResult(INITIAL_STATE.result);
+    setEntry(INITIAL_STATE.entry);
+    setOperator(INITIAL_STATE.operator);
   };
 
   const deleteChar = () => {
@@ -26,7 +43,7 @@ export default function App() {
     if (entry) {
       const newResult = eval(`${result} ${operator} ${entry}`);
       setResult(newResult);
-      setEntry("");
+      setEntry(INITIAL_STATE.entry);
     }
   };
 
